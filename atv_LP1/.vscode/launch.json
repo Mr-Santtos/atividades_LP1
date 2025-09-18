@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/santos/Documents/codes/calculadora",
-      "program": "c:/Users/santos/Documents/codes/calculadora/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/cabelo/Documentos/codigos/tarefas_aulas/Lp_1",
+      "program": "/home/cabelo/Documentos/codigos/tarefas_aulas/Lp_1/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

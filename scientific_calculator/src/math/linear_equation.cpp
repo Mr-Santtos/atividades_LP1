@@ -1,4 +1,4 @@
-#include "include\linear_equation.h"
+#include "linear_equation.h"
 #include <sstream>
 #include <limits>
 

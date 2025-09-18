@@ -13,7 +13,7 @@
  *   std::vector<std::string>.
  *********************************************************************/
 
-#include "include\quadratic_equation.h"
+#include "quadratic_equation.h"
 
 #include <cmath>
 #include <stdexcept>

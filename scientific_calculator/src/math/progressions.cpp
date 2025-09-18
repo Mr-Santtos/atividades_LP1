@@ -1,5 +1,5 @@
 
-#include "include\progressions.h"
+#include "progressions.h"
 
 namespace math {
 namespace progressions {

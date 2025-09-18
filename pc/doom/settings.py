@@ -1,0 +1,12 @@
+
+
+RES = width, height = 1300, 700
+
+
+FPS = 30
+
+
+PLAYER_POS = 1.5, 5
+PLAYER_ANGLE = 0        
+PLAYER_SPEED = 0.005
+PLAYER_ROT_SPEED = 0.002
