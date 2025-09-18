@@ -6,7 +6,7 @@
  * descreve, passo a passo, como esse resultado foi obtido.  
  */
 
-#include "matrices.h"
+#include "include\matrices.h"
 
 #include <cmath>
 #include <sstream>
