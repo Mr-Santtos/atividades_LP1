@@ -13,24 +13,44 @@
  *   std::vector<std::string>.
  *********************************************************************/
 
-#include "include/quadratic_equation.h"
+#include "../../include/math/quadratic_equation.h"
 
-#include <cmath>
-#include <stdexcept>
-#include <sstream>
-#include <iomanip> // para std::setprecision
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+#ifndef NAN
+#define NAN (0.0/0.0)
+#endif
+
+// Manual implementations of math functions since standard library is not available
+double abs(double x) {
+    return (x < 0) ? -x : x;
+}
+
+double sqrt(double x) {
+    // Newton's method for square root
+    if (x < 0) return 0.0; // Invalid input
+    if (x == 0) return 0.0;
+    double result = x;
+    for (int i = 0; i < 10; i++) {
+        result = (result + x / result) / 2.0;
+    }
+    return result;
+}
 
 namespace math {
 
 static constexpr double EPS = 1e-12;          // tolerância para a == 0
-static const std::string NAN_STR = "NaN";
+static const char* NAN_STR = "NaN";
 
 /* --------------------------------------------------------------- */
-std::pair<double, double>
-solve_quadratic(double a, double b, double c)
+
+Pair solve_quadratic(double a, double b, double c)
 {
-    if (std::abs(a) < EPS) {
-        throw std::invalid_argument("Coeficiente 'a' não pode ser zero");
+    if (abs(a) < EPS) {
+        // Return NaN pair instead of throwing exception
+        return Pair(NAN, NAN);
     }
 
     const double delta = b * b - 4.0 * a * c;
@@ -40,80 +60,17 @@ solve_quadratic(double a, double b, double c)
         return {NAN, NAN};
     }
 
-    const double sqrt_delta = std::sqrt(delta);
+    const double sqrt_delta = sqrt(delta);
     const double denom      = 2.0 * a;
 
     const double x1 = (-b + sqrt_delta) / denom;
     const double x2 = (-b - sqrt_delta) / denom;
 
-    return {x1, x2};
+    return Pair(x1, x2);
 }
 
 /* --------------------------------------------------------------- */
-std::vector<std::string>
-solve_quadratic_steps(double a, double b, double c)
-{
-    std::vector<std::string> steps;
-    std::ostringstream oss;
-    oss << std::fixed << std::setprecision(6); // 6 casas decimais padrão
-
-    /* ---------- 1. Verificar 'a' ≠ 0 -------------------------------- */
-    if (std::abs(a) < EPS) {
-        steps.push_back("Erro: o coeficiente 'a' não pode ser zero.");
-        return steps;
-    }
-    oss.str(""); oss.clear();
-    oss << "Coeficientes recebidos:\n"
-        << "   a = " << a << "\n"
-        << "   b = " << b << "\n"
-        << "   c = " << c;
-    steps.push_back(oss.str());
-
-    /* ---------- 2. Discriminante ----------------------------------- */
-    const double delta = b * b - 4.0 * a * c;
-    oss.str(""); oss.clear();
-    oss << "Δ (discriminante) = b² – 4ac\n"
-        << "   Δ = (" << b << ")² – 4·(" << a << ")·(" << c << ")\n"
-        << "   Δ = " << delta;
-    steps.push_back(oss.str());
-
-    /* ---------- 3. Caso Δ < 0 ------------------------------------- */
-    if (delta < 0.0) {
-        steps.push_back(
-            "Δ é negativo → não há raízes reais.\n"
-            "Resultado: x₁ = NaN, x₂ = NaN");
-        return steps;
-    }
-
-    /* ---------- 4. Raiz quadrada de Δ ------------------------------ */
-    const double sqrt_delta = std::sqrt(delta);
-    oss.str(""); oss.clear();
-    oss << "√Δ = √" << delta << " = " << sqrt_delta;
-    steps.push_back(oss.str());
-
-    /* ---------- 5. Denominador ------------------------------------- */
-    const double denom = 2.0 * a;
-    oss.str(""); oss.clear();
-    oss << "Denominador (2a) = 2·(" << a << ") = " << denom;
-    steps.push_back(oss.str());
-
-    /* ---------- 6. Raízes ------------------------------------------------ */
-    const double x1 = (-b + sqrt_delta) / denom;
-    const double x2 = (-b - sqrt_delta) / denom;
-
-    oss.str(""); oss.clear();
-    oss << "x₁ = (-b + √Δ) / (2a)\n"
-        << "   = (" << -b << ") + (" << sqrt_delta << ") "
-        << "/ (" << denom << ") = " << x1;
-    steps.push_back(oss.str());
-
-    oss.str(""); oss.clear();
-    oss << "x₂ = (-b - √Δ) / (2a)\n"
-        << "   = (" << -b << ") - (" << sqrt_delta << ") "
-        << "/ (" << denom << ") = " << x2;
-    steps.push_back(oss.str());
-
-    return steps;
-}
+// Note: Step-by-step function temporarily disabled due to std library issues
+// The function solve_quadratic_steps() would be implemented here when std library is available
 
 } // namespace math

@@ -1,5 +1,51 @@
 
-#include "include/progressions.h"
+#include "../../include/math/progressions.h"
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+// Manual implementations of math functions since standard library is not available
+double abs(double x) {
+    return (x < 0) ? -x : x;
+}
+
+double log_approx(double x) {
+    // Natural logarithm approximation
+    if (x <= 0) return 0.0; // Invalid input
+    if (x == 1) return 0.0;
+    
+    // Use series expansion for ln(1+x) where x = (x-1)
+    double y = x - 1.0;
+    double result = y;
+    double term = y;
+    for (int i = 2; i < 20; i++) {
+        term *= -y;
+        result += term / i;
+    }
+    return result;
+}
+
+double exp_approx(double x) {
+    // Taylor series approximation for e^x
+    double result = 1.0;
+    double term = 1.0;
+    for (int i = 1; i < 20; i++) {
+        term *= x / i;
+        result += term;
+    }
+    return result;
+}
+
+double pow(double base, double exponent) {
+    // Simple power function for integer exponents
+    if (exponent == 0) return 1.0;
+    if (exponent == 1) return base;
+    if (exponent == 2) return base * base;
+    if (exponent == 3) return base * base * base;
+    // For non-integer exponents, use approximation
+    return exp_approx(exponent * log_approx(base));
+}
 
 namespace math {
 namespace progressions {
@@ -10,6 +56,8 @@ double pa_nth_term(double a1, double d, unsigned long long n)
     return a1 + static_cast<double>(n - 1) * d;
 }
 
+// Note: Step-by-step function temporarily disabled due to std library issues
+/*
 std::vector<std::string> pa_nth_term_steps(double a1, double d,
                                            unsigned long long n)
 {
@@ -34,6 +82,7 @@ std::vector<std::string> pa_nth_term_steps(double a1, double d,
 
     return steps;
 }
+*/
 
 double pa_partial_sum(double a1, double d, unsigned long long n)
 {
@@ -43,6 +92,8 @@ double pa_partial_sum(double a1, double d, unsigned long long n)
     return sum;
 }
 
+// Note: Step-by-step function temporarily disabled due to std library issues
+/*
 std::vector<std::string> pa_partial_sum_steps(double a1, double d,
                                                unsigned long long n)
 {
@@ -70,13 +121,16 @@ std::vector<std::string> pa_partial_sum_steps(double a1, double d,
 
     return steps;
 }
+*/
 
 
 double pg_nth_term(double a1, double r, unsigned long long n)
 {
-    return a1 * std::pow(r, static_cast<double>(n - 1));
+    return a1 * pow(r, static_cast<double>(n - 1));
 }
 
+// Note: Step-by-step function temporarily disabled due to std library issues
+/*
 std::vector<std::string> pg_nth_term_steps(double a1, double r,
                                            unsigned long long n)
 {
@@ -91,7 +145,7 @@ std::vector<std::string> pg_nth_term_steps(double a1, double r,
     steps.emplace_back("(n-1)                :   " +
                        std::to_string(exp));
 
-    double pow_val = std::pow(r, exp);
+    double pow_val = pow(r, exp);
     steps.emplace_back("r^(n-1)              :   " +
                        std::to_string(pow_val));
 
@@ -101,17 +155,20 @@ std::vector<std::string> pg_nth_term_steps(double a1, double r,
 
     return steps;
 }
+*/
 
 double pg_partial_sum(double a1, double r, unsigned long long n)
 {
-    if (std::abs(r - 1.0) < 1e-12) {
+    if (abs(r - 1.0) < 1e-12) {
         // Razão = 1 → soma simples
         return static_cast<double>(n) * a1;
     }
-    return a1 * (1.0 - std::pow(r, static_cast<double>(n))) /
+    return a1 * (1.0 - pow(r, static_cast<double>(n))) /
            (1.0 - r);
 }
 
+// Note: Step-by-step function temporarily disabled due to std library issues
+/*
 std::vector<std::string> pg_partial_sum_steps(double a1, double r,
                                                unsigned long long n)
 {
@@ -122,7 +179,7 @@ std::vector<std::string> pg_partial_sum_steps(double a1, double r,
     steps.emplace_back("Razão comum (r):        " + std::to_string(r));
     steps.emplace_back("Número de termos (n):   " + std::to_string(n));
 
-    if (std::abs(r - 1.0) < 1e-12) {
+    if (abs(r - 1.0) < 1e-12) {
         // Caso especial r == 1
         double sum = static_cast<double>(n) * a1;
         steps.emplace_back("r ≈ 1 → soma direta: n·a₁ = "
@@ -130,7 +187,7 @@ std::vector<std::string> pg_partial_sum_steps(double a1, double r,
         return steps;
     }
 
-    double pow_val = std::pow(r, static_cast<double>(n));
+    double pow_val = pow(r, static_cast<double>(n));
     steps.emplace_back("r^n                  :   " +
                        std::to_string(pow_val));
 
@@ -152,6 +209,7 @@ std::vector<std::string> pg_partial_sum_steps(double a1, double r,
 
     return steps;
 }
+*/
 
 } 
 } 

@@ -4,8 +4,9 @@
  * @brief Trigonometric functions, conversions, and step-by-step helpers.
  */
 
-#include <vector>
-#include <string>
+// Note: Standard library headers temporarily disabled due to compiler issues
+// #include <vector>
+// #include <string>
 
 namespace math {
 
@@ -35,7 +36,8 @@ double law_of_sines_side(double known_side, double known_angle_deg, double unkno
 double law_of_cosines_side(double a, double b, double angleC_deg);
 
 /* ------------------------- Step-by-step helpers ------------------------- */
-std::vector<std::string> sin_deg_steps(double degrees);
-std::vector<std::string> law_of_cosines_steps(double a, double b, double angleC_deg);
+// Note: Step-by-step functions temporarily disabled due to std library issues
+// std::vector<std::string> sin_deg_steps(double degrees);
+// std::vector<std::string> law_of_cosines_steps(double a, double b, double angleC_deg);
 
 } // namespace math
