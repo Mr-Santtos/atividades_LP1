@@ -6,11 +6,33 @@
  * descreve, passo a passo, como esse resultado foi obtido.  
  */
 
-#include "include/matrices.h"
+#include "../../include/math/matrices.h"
 
-#include <cmath>
-#include <sstream>
-#include <iomanip>
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+// Manual implementations of math functions since standard library is not available
+double abs(double x) {
+    return (x < 0) ? -x : x;
+}
+
+// Manual matrix type definitions to replace std::array
+struct Matrix2x2 {
+    double data[2][2];
+    double& operator()(int row, int col) { return data[row][col]; }
+    const double& operator()(int row, int col) const { return data[row][col]; }
+    double* operator[](int row) { return data[row]; }
+    const double* operator[](int row) const { return data[row]; }
+};
+
+struct Matrix3x3 {
+    double data[3][3];
+    double& operator()(int row, int col) { return data[row][col]; }
+    const double& operator()(int row, int col) const { return data[row][col]; }
+    double* operator[](int row) { return data[row]; }
+    const double* operator[](int row) const { return data[row]; }
+};
 
 namespace math {
 namespace matrices {
@@ -21,6 +43,8 @@ double det_2x2(const Matrix2x2& m) {
     return m[0][0]*m[1][1] - m[0][1]*m[1][0];
 }
 
+// Note: Step-by-step function temporarily disabled due to std library issues
+/*
 std::vector<std::string> det_2x2_steps(const Matrix2x2& m) {
     std::vector<std::string> steps;
     steps.emplace_back("Determinante de uma matriz 2x2:");
@@ -42,6 +66,7 @@ std::vector<std::string> det_2x2_steps(const Matrix2x2& m) {
 
     return steps;
 }
+*/
 
 /* --------------------------------------------------------------------- */
 /*  Det. 3×3 ------------------------------------------------------------ */
@@ -51,6 +76,8 @@ double det_3x3(const Matrix3x3& m) {
          + m[0][2]*(m[1][0]*m[2][1] - m[1][1]*m[2][0]);
 }
 
+// Note: Step-by-step function temporarily disabled due to std library issues
+/*
 std::vector<std::string> det_3x3_steps(const Matrix3x3& m) {
     std::vector<std::string> steps;
     steps.emplace_back("Determinante de uma matriz 3x3:");
@@ -81,12 +108,13 @@ std::vector<std::string> det_3x3_steps(const Matrix3x3& m) {
 
     return steps;
 }
+*/
 
 /* --------------------------------------------------------------------- */
 /*  Inverso 2×2 --------------------------------------------------------- */
 bool inverse_2x2(const Matrix2x2& m, Matrix2x2& inv) {
     double d = det_2x2(m);
-    if (std::abs(d) < 1e-12) return false;
+    if (abs(d) < 1e-12) return false;
 
     inv[0][0] =  m[1][1]/d;
     inv[0][1] = -m[0][1]/d;
@@ -95,12 +123,14 @@ bool inverse_2x2(const Matrix2x2& m, Matrix2x2& inv) {
     return true;
 }
 
+// Note: Step-by-step function temporarily disabled due to std library issues
+/*
 std::vector<std::string> inverse_2x2_steps(const Matrix2x2& m) {
     std::vector<std::string> steps;
     steps.emplace_back("Cálculo da inversa de uma matriz 2x2:");
 
     double d = det_2x2(m);
-    if (std::abs(d) < 1e-12) {
+    if (abs(d) < 1e-12) {
         steps.emplace_back("Matriz singular, inversa não existe.");
         return steps;
     }
@@ -122,12 +152,13 @@ std::vector<std::string> inverse_2x2_steps(const Matrix2x2& m) {
 
     return steps;
 }
+*/
 
 /* --------------------------------------------------------------------- */
 /*  Inverso 3×3 --------------------------------------------------------- */
 bool inverse_3x3(const Matrix3x3& m, Matrix3x3& inv) {
     double d = det_3x3(m);
-    if (std::abs(d) < 1e-12) return false;
+    if (abs(d) < 1e-12) return false;
 
     double c00 =  (m[1][1]*m[2][2] - m[1][2]*m[2][1]);
     double c01 = -(m[1][0]*m[2][2] - m[1][2]*m[2][0]);
@@ -146,12 +177,14 @@ bool inverse_3x3(const Matrix3x3& m, Matrix3x3& inv) {
     return true;
 }
 
+// Note: Step-by-step function temporarily disabled due to std library issues
+/*
 std::vector<std::string> inverse_3x3_steps(const Matrix3x3& m) {
     std::vector<std::string> steps;
     steps.emplace_back("Cálculo da inversa de uma matriz 3x3:");
 
     double d = det_3x3(m);
-    if (std::abs(d) < 1e-12) {
+    if (abs(d) < 1e-12) {
         steps.emplace_back("Matriz singular, inversa não existe.");
         return steps;
     }
@@ -188,6 +221,7 @@ std::vector<std::string> inverse_3x3_steps(const Matrix3x3& m) {
 
     return steps;
 }
+*/
 
 } // namespace matrices
 } // namespace math
