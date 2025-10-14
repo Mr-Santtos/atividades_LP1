@@ -1,1 +1,0 @@
-# Manual (placeholder)\n\nDescrever o uso do dispositivo e dos módulos.
