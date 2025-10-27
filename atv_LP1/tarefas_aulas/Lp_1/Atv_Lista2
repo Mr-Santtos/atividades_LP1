@@ -1,0 +1,30 @@
+1) Criar um arquivo chamado filmes, com a extensão de sua preferência (“.txt”, “.csv” ou “.xlsx”) com o seguinte 
+conteúdo:
+1982, TRON
+1983, WarGames
+1995, Hackers
+1999, Pirates of Silicon Valley
+2010, The Social Network
+2013, Jobs
+2014, The Imitation Game
+2014, Ex Machina
+2016, Snowden
+2018, Ready Player One
+Nota-se que se trata de uma lista de filmes, contendo ano e título do filme. 
+2) Criar um repositório em sua conta do github com o nome de “atividade-13-10-2025”
+3) Desenvolva um algoritmo que leia o arquivo filmes, percorra seus registros e solicite, para cada registro, uma nota 
+de avaliação. 
+- O valor da nota deve estar entre 0 e 10, outros valores devem ser tratados.
+- Salve a lista com os filmes e as notas em um arquivo chamado “filmes_avaliacao” com a extensão de sua preferência 
+(“.txt”, “.csv” ou “.xlsx”).
+- Salve o algoritmo com o nome de avaliacao.py.
+4) Desenvolva um algoritmo que leia o arquivo “filmes_avaliacao” verifique os 5 (cinco) filmes com maiores notas e 
+salve em um arquivo chamado “filmes_indicacao”.
+- Em caso de empate por nota, selecione por ordem alfabética.
+- Salve o algoritmo com o nome de indicacao.py. 
+5) Desenvolva um algoritmo que leia o arquivo “filmes_indicacao” e imprima na tela (print) os filmes ordenados pela 
+nota de avaliação do maior para o menor.
+- Salve o algoritmo com o nome de top_filmes.py. 
+6) Adicionar todos os arquivos (“.txt”, “.csv”, “.xlsx”, “py”...) utilizados no repositório do github criado na questão 1 
+(“atividade-13-10-2025”).
+Submeter o link do repositório na tarefa nomeada “atividade-13-10-2025” no classroom da disciplina.
