@@ -42,8 +42,8 @@ int main() {
 
     sort(filmes.begin(), filmes.end(), [](const Filme &a, const Filme &b) {
         if (a.nota != b.nota)
-            return a.nota > b.nota; // maior nota primeiro
-        return a.titulo < b.titulo; // em caso de empate, ordem alfabética
+            return a.nota > b.nota;
+        return a.titulo < b.titulo; 
     });
 
     output << "Ano,Filme,Nota\n";
